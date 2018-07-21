@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <menu id='menubar'>
+    <submenu>
+    <attribute name='label' translatable='yes'>_Game</attribute>
+      <item>
+        <attribute name='label' translatable='yes'>_New</attribute>
+        <attribute name='action'>chess.new</attribute>
+        <attribute name='accel'>&lt;Primary&gt;n</attribute>
+      </item>
+      <item>
+        <attribute name='label' translatable='yes'>_Load PGN file</attribute>
+        <attribute name='action'>chess.load</attribute>
+        <attribute name='accel'>&lt;Primary&gt;l</attribute>
+      </item>
+      <item>
+        <attribute name='label' translatable='yes'>_Build from FEN</attribute>
+        <attribute name='action'>chess.readfen</attribute>
+        <attribute name='accel'>&lt;Primary&gt;d</attribute>
+      </item>
+      <item>
+        <attribute name='label' translatable='yes'>_Save as PGN</attribute>
+        <attribute name='action'>chess.save</attribute>
+        <attribute name='accel'>&lt;Primary&gt;s</attribute>
+      </item>
+      <item>
+        <attribute name='label' translatable='yes'>_Close</attribute>
+        <attribute name='action'>chess.close</attribute>
+        <attribute name='accel'>&lt;Primary&gt;c</attribute>
+      </item>
+      <item>
+        <attribute name='label' translatable='yes'>_Quit</attribute>
+        <attribute name='action'>chess.quit</attribute>
+        <attribute name='accel'>&lt;Primary&gt;q</attribute>
+      </item>
+      <item>
+        <attribute name='label' translatable='yes'>_Preferences</attribute>
+        <attribute name='action'>chess.preferences</attribute>
+        <attribute name='accel'>&lt;Primary&gt;p</attribute>
+      </item>
+    </submenu>
+    <submenu>
+    <attribute name='label' translatable='yes'>_Actions</attribute>
+      <item>
+        <attribute name='label' translatable='yes'>_Start</attribute>
+        <attribute name='action'>chess.start</attribute>
+        <attribute name='accel'>&lt;Primary&gt;e</attribute>
+      </item>
+      <item>
+        <attribute name='label' translatable='yes'>_Back</attribute>
+        <attribute name='action'>chess.back</attribute>
+        <attribute name='accel'>&lt;Primary&gt;k</attribute>
+      </item>
+      <item>
+        <attribute name='label' translatable='yes'>_Back All</attribute>
+        <attribute name='action'>chess.backall</attribute>
+        <attribute name='accel'>&lt;Primary&gt;z</attribute>
+      </item>
+      <item>
+        <attribute name='label' translatable='yes'>_Forward</attribute>
+        <attribute name='action'>chess.forward</attribute>
+        <attribute name='accel'>&lt;Primary&gt;f</attribute>
+      </item>
+      <item>
+        <attribute name='label' translatable='yes'>_Forward All</attribute>
+        <attribute name='action'>chess.forwardall</attribute>
+        <attribute name='accel'>&lt;Primary&gt;x</attribute>
+      </item>
+      <item>
+        <attribute name='label' translatable='yes'>_Resign</attribute>
+        <attribute name='action'>chess.resign</attribute>
+        <attribute name='accel'>&lt;Primary&gt;r</attribute>
+      </item>
+    </submenu>
+    <submenu>
+    <attribute name='label' translatable='yes'>_Chess Engines</attribute>
+      <item>
+        <attribute name='label' translatable='yes'>_White Options</attribute>
+        <attribute name='action'>chess.prefcewh</attribute>
+        <attribute name='accel'>&lt;Primary&gt;w</attribute>
+      </item>
+      <item>
+        <attribute name='label' translatable='yes'>_Black Options</attribute>
+        <attribute name='action'>chess.prefcebl</attribute>
+        <attribute name='accel'>&lt;Primary&gt;b</attribute>
+      </item>
+      <item>
+        <attribute name='label' translatable='yes'>_Stop Chess Engine</attribute>
+        <attribute name='action'>chess.stopchen</attribute>
+        <attribute name='accel'>&lt;Primary&gt;o</attribute>
+      </item>
+      <item>
+        <attribute name='label' translatable='yes'>_Analyse Move</attribute>
+        <attribute name='action'>chess.analysechen</attribute>
+        <attribute name='accel'>&lt;Primary&gt;a</attribute>
+      </item>
+    </submenu>
+    <submenu>
+    <attribute name='label' translatable='yes'>_Writing</attribute>
+      <item>
+        <attribute name='label' translatable='yes'>_Write short algebraic notation</attribute>
+        <attribute name='action'>chess.historysaveshort</attribute>
+        <attribute name='accel'>&lt;Primary&gt;i</attribute>
+      </item>
+      <item>
+        <attribute name='label' translatable='yes'>_Write long algebraic notation</attribute>
+        <attribute name='action'>chess.historysavelong</attribute>
+        <attribute name='accel'>&lt;Primary&gt;j</attribute>
+      </item>
+      <item>
+        <attribute name='label' translatable='yes'>_Show short algebraic notation</attribute>
+        <attribute name='action'>chess.historyshowshort</attribute>
+        <attribute name='accel'>&lt;Primary&gt;t</attribute>
+      </item>
+      <item>
+        <attribute name='label' translatable='yes'>_Show long algebraic notation</attribute>
+        <attribute name='action'>chess.historyshowlong</attribute>
+        <attribute name='accel'>&lt;Primary&gt;u</attribute>
+      </item>
+      <item>
+        <attribute name='label' translatable='yes'>_Get FEN representation</attribute>
+        <attribute name='action'>chess.fennot</attribute>
+        <attribute name='accel'>&lt;Primary&gt;y</attribute>
+      </item>
+    </submenu>
+    <submenu>
+    <attribute name='label' translatable='yes'>_About</attribute>
+      <item>
+        <attribute name='label' translatable='yes'>_About</attribute>
+        <attribute name='action'>chess.about</attribute>
+        <attribute name='accel'>&lt;Primary&gt;m</attribute>
+      </item>
+      <item>
+        <attribute name='label' translatable='yes'>_Help</attribute>
+        <attribute name='action'>chess.help</attribute>
+        <attribute name='accel'>&lt;Primary&gt;h</attribute>
+      </item>
+    </submenu>
+  </menu>
+</interface>

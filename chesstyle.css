@@ -1,0 +1,21 @@
+/* CSS for the chessboard gui. It is loaded by the gui_interface at run time:
+ * No need to recompile to apply the changes here, but the css file must be present with the binary file
+ */
+
+#blacksquare {/*actually is grey, a pitch black would be 0,0,0. Second line is to have a white text on the dark background */
+  background-color: rgb(120,120,120);
+  color: rgb(255, 255, 255);
+}
+
+#whitesquare {
+  background-color: rgb(255,255,255);
+}
+
+/*a darker background to be used when squares are "selected" */
+#selectedblacksquare {
+  background-color: rgb(80, 80, 80);
+}
+
+#selectedwhitesquare {
+  background-color: rgb(220, 220, 220);
+}
