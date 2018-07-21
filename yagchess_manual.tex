@@ -1,0 +1,344 @@
+\documentclass[a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[english]{babel}
+
+\newcommand{\nameprog}{Yagchess}
+\newcommand{\version}{1.0}
+
+\title{\nameprog\ manual}
+\author{Valentino Esposito}
+\date{}
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+
+\section{Introduction}
+\nameprog\ is a free GUI to play Chess, written in C++ for Linux systems. It can be used to play chess against other human players on the same machine.
+It is designed to be light and easy to use. \nameprog\ stands for Yet Another Gui for CHESS. This is version \version.
+
+It can be used to play chess against a chess engine, however no chess engine is provided with \nameprog. You have to obtain and install a compatible chess engine,
+and set \nameprog\ to use it. Section \ref{howce} explains how to do these things.
+
+\nameprog\ uses the \textbf{UCI protocol} to interact with the chess engine, hence any UCI-compatible chess engine should work.
+You can find free chess engines on the internet, such as Stockfish or Gnuchess.
+
+This manual explains how to install \nameprog\ in Section \ref{install}, provides a short description on how to start a game in Section \ref{quick}, describes
+other useful features of the program in Sections \ref{gamefeat}, explains how to set the GUI to play against a chess engine in Section \ref{howce}. Finally a
+description of the menu bar is provided in Section \ref{menu}.\\
+
+\nameprog\ is free and distributed under the GNU General Public License (GPL). Essentially, this means that you are free
+to do almost exactly what you want with the program, including distributing it among your friends, making it available for download from your web site,
+selling it (either by itself or as part of some bigger software package), or using it as the starting point for a software project of your own.
+
+The only real limitation is that whenever you distribute \nameprog\ in some way, you must always include the full source code,
+or a pointer to where the source code can be found. If you make any changes to the source code, these changes must also be made available under the GPL.
+
+For full details, read the copy of the GPL found in the file named LICENSE.txt
+
+
+\section{Installation}
+\label{install}
+\subsection{Package contents}
+Before installing check that the distribution contains all the files.
+\nameprog\ version \version\ consists of the following files:
+
+\begin{itemize}
+\item README.txt, a text file for quick reference.
+\item LICENSE.txt, a text file containing the GNU General Public License.
+\item \textbf{src}, a subdirectory containing the source code in C++, including a Makefile that can be used to compile \nameprog.
+\item \textbf{resources}, a subdirectory containing xml and css files needed to build the GUI.
+\item \textbf{chess\_pieces\_icons}, a subdirectory of resources containing the 12 images of the pieces (png format).
+\item \textbf{documentation}, a directory containing the manual in pdf format (the one you are reading) and the tex source of the manual.
+\end{itemize}
+
+All these files are in the main directory \textbf{yagchess1.0-linux}.
+
+
+\subsection{Installation under Linux}
+\nameprog\ can be installed on any Linux systems. To compile \nameprog, you need the \textbf{gnu gcc} compiler and the \textbf{gtkmm3.0} library.
+The gcc compiler is already installed on most linux distributions.
+
+If you do not have gtkmm, the best way to get it is probably to install it by using you package manager.
+Open a terminal and type:
+
+\begin{quote}
+apt-get install libgtkmm-3.0-dev
+\end{quote}
+
+if you use a Debian based distribution or
+
+\begin{quote}
+yum install gtkmm30-docs
+\end{quote}
+
+if you use a Fedora/Red Hat based distribution. See also the gtkmm website.\footnote{https://www.gtkmm.org/en/download.html}
+You probably need root privilege to install the packages.
+
+You can also install gtkmm from source code, if you prefer this way follow the instruction on the gtkmm website.\\
+
+Once you have installed gtkmm, you can compile the program. Go in the \textbf{src} directory and type:
+
+\begin{quote}
+make install
+\end{quote}
+
+That's all. The program is simple, there is no need of a configure script.
+
+The binary file is created in the main directory, it's called \textbf{yagchess.x}
+
+
+\subsection{Uninstallation}
+To remove executable and object files, go in the src directory and type:
+
+\begin{quote}
+make clean
+\end{quote}
+
+This will not remove source code, documentation or resources. You can delete all these files manually.
+
+
+\subsection{Installation under other systems}
+\nameprog\ has been written for Linux, so it will not work under other system.
+
+If you wish to port it under other systems, consider that the program is written following the C++14 standard. It uses only the C++14 standard library and gtkmm3.0
+(and gtkmm dependencies such as libsigc++), plus few functions from the C unix library to manage interprocess comunication, included in the unistd.h and sys/wait.h headers.
+There are no other dependencies.
+
+So if you have a C++14 compiler and you manage to install gtkmm3.0 on your system, you just have to fix the interprocess comunication class in the
+ipcproc.hpp and ipcproc.cpp files by using any function supported by your operative system (or see if those headers are supported by your system).
+
+
+\section{Quick start}
+\label{quick}
+\subsection{Play a new game against another human}
+When you start the program, you will see the interface with the chessboard on the left side, few buttons on the right side which provide the main functionalities,
+a text area on the right side just below the buttons and another text area on the bottom.
+
+Click on the \textbf{New} button to start a new game. The pieces will appear on the chessboard. To actually start the game, you need to press also the \textbf{Start} button.
+This is needed in order to edit some options which are available only after a new game is started (such as the chess engine options, see Section \ref{howce:opt}).
+
+To move a piece, simply click on it. The program highlight the squares where the pieces can be moved. Click on one of these squares to complete the move.
+You play in front of the same machine: simply share the mouse when you have concluded your move.
+
+
+\subsection{Play against a chess engine}
+As said, the \nameprog\ GUI can be used to play against any UCI-compatible chess engine you may have installed on your system. See
+Section \ref{howce} to know how to add a chess engine to \nameprog.
+
+Playing against a chess engine is pretty much the same of playing against another person. You do your move and wait for the move of the chess engine.
+The bottom text area shows the informations sent by the chess engine.
+
+To play against a chess engine open the \textit{Game $\rightarrow$ Preferences} panel from the menu bar and edit the entry in the \textit{Set players} option. Select one of
+the ``human vs chess engine'' options: you may choose who is white and who is black between you or the chess engine, or alternate the colours each game.
+
+A text engine will take his time to think on the move. The button \textbf{Stop CE} can be used to stop a chess engine, and force it to play immediately.
+The chess engine will play the best move it found in the given time. A click on the chessboard with the \textit{right button} of the mouse has the same effect.
+
+You can set a maximum time for the chess engine to think: check the flag \textbf{Limit CE thinking time} in the right side of the interface and set the time
+in the spin button. The chess engine will not think longer than the given time. If a time limit is not set, the chess engine may think indefinitely, until
+you stop it, but see also Section \ref{time} for more details.
+
+
+\section{GUI features}
+\label{gamefeat}
+\subsection{Save and Load the game}
+\label{saveload}
+\nameprog\ uses the Portable Game Notation (PGN) format. PGN is a light international notation used to store chess games on a machine.
+You can learn more on PGN on the internet.\footnote{http://www.saremba.de/chessgml/standards/pgn/pgn-complete.htm}
+
+The \textit{Game $\rightarrow$ Load PGN file} and \textit{Game $\rightarrow$ Save as PGN} panels from the menu bar allow respectively to load a game saved in PGN format
+and to save the current game you are playing in a PGN file on your disk. You can use these features to save a game and continue it later, or to look at any game recorded 
+in a PGN file in \nameprog.
+
+Many tournaments record their games in PGN format, and make them available on the internet. \nameprog\ can deal with PGN files containing multiple games, however it
+can not save multiple games in a single PGN file.\\
+
+Another way to load and save the game is through the use of the Forsyth-Edwards Notation (FEN). The FEN is a representation of the chessboard in a single string of text. You
+can find more on the FEN on the internet.
+
+The \textit{Game $\rightarrow$ Build from FEN} panel from the menu bar allows you to write a FEN string in an entry. The pieces on the chessboard will be placed according
+to the FEN, so that you can continue the game from this disposition. The \textit{Writing $\rightarrow$ Get FEN representation} panel
+from the menu bar write the FEN representation of the current game in a label, so that you can copy it and save in a file.
+
+
+\subsection{Timed game}
+\label{time}
+The \textit{Game $\rightarrow$ Preferences} panel from the menu bar also allows you to set a time limit. The time is shown at the top of the interface: two clocks
+which count down the time during the turn of the player.
+
+You can set between various time options, from a minimum of \textit{10 minutes} to a maximum of \textit{3 hours}. This is the time for each player. Of course there is
+also the \textit{no limit} option, which is the default. Time limit is sudden death: no extra time is added during the game.
+
+If you are playing against a chess engine, a time limit is set and the \textbf{Limit CE thinking time} flag is unchecked, the chess engine will evaluate by itself the time
+it needs to think, Of course, you can always force it to move immediately by pressing the \textbf{Stop CE} button or by \textit{right clicking} on the chessboard.
+
+
+\subsection{Other features}
+The interface provides other useful buttons. The \textbf{Back} and \textbf{Forward} buttons can be used to move along the history of the game, reviewing the previous moves.
+You can modify your previous moves if you wish, restarting the game from that point. The \textbf{Resign} button is used to surrend and close the game.
+
+A \textit{right click} on the chessboard during the turn of the human player opens a popup menu which contains features useful to beginner players. They refers to the pieces
+in the square where the right click occurred:
+\begin{description}
+\item[Menacing:] highlights the opponent's pieces menaced by the piece in the square, if present.
+\item[Protecting:] highlights the one's pieces proteced by the piece in the square, if present.
+\item[Menaced by:] highlights the opponent's pieces which are menacing the piece in the square or the free square.
+\item[Protected by:] highlights the one's pieces which are protecting the piece in the square or the free square.
+\end{description}
+
+
+\section{How to use chess engines}
+\label{howce}
+\subsection{What is a chess engine}
+A chess engine is a program able to play chess. Simply speaking, given a disposition of pieces on the chessboard, it can evaluate the best move for the player.
+How it does this, is another matter. You can learn more on chess engines on the internet if you wish.
+
+Usually chess engines are stand-alone projects. They focus on the ability of the program to evaluate the best move, and do not come with a graphical interface (GUI).
+They use a communication protocol such as the Universal Chess Interface (UCI)\footnote{Here the specifics of the UCI protocol: http://wbec-ridderkerk.nl/html/UCIProtocol.html}
+to communicate with a GUI.
+
+\nameprog\ uses the UCI protocol to ``talk'' with the chess engine. So as long the chess engine can use the UCI protocol, it can be used with \nameprog.
+
+Two UCI-compatible open source chess engines distributed under the GNU public license are Stockfish\footnote{https://stockfishchess.org/}
+and Gnuchess\footnote{https://www.gnu.org/software/chess/}. You may start with these, if you wish, or look for others chess engines on the internet.
+
+
+\subsection{Installing a chess engine}
+First, you have to install a chess engine. To do this follow the instructions of the chess engine you want to install. Be sure that is an UCI-compatible chess engine,
+as \nameprog\ uses the UCI protocol as explained before.
+
+
+\subsection{Add a chess engine to \nameprog}
+Once you have installed the chess engine, open the \textit{Game $\rightarrow$ Preferences} panel from the menu bar.
+
+In the \textit{New chess engine name} entry put the name of the chess engine. It has not to be the real name of the chess engine,
+it is just a name you use to identify this chess engine inside \nameprog.
+
+In the \textit{New chess engine path} entry put the full path of the chess engine. You need the path of the binary file representing the chess engine program.
+You can write it manually, or use the button \textbf{Select CE}. This button opens a dialog which allows you to navigate in your system and find the file.
+Select the correct file and press the button \textbf{Select}: this will close the dialog and copy the path in the \textit{New chess engine path} entry.
+
+Suppose you have installed Gnuchess version 6.2.4, the string in the \textit{New chess engine path} entry should look like:
+
+\begin{quote}
+/home/user/gnuchess-6.2.4/src/gnuchessu
+\end{quote}
+
+The full path of course may be different than this one, depending on where you installed the chess engine.
+
+Now press the button \textbf{Add to the list}. Now the chess engine is added to the \textit{Chess Engine List} on top of the panel.
+Be careful: invalid paths are not recognized here, so if there is a typo or an error in the path, you will discover it only when you start the game.\\
+
+Once the chess engine is in the list, you have to assign it to a player (white or black). \textit{Right click} on the chess engine line in the Chess Engine List
+and from the popup menu choose \textit{Set for White} if you want to assing this chess engine to the white player, or choose \textit{Set for Black}
+if you want to assing it to the black player.
+
+This configuration gives you complete control on which colour should be moved by the chess engine, and which chess engine must be used in case you have several chess engines
+in your list. You may set different chess engines for white and black, to play agains different ``opponents'' when you are white or black. You may even set a game
+between two chess engines and see which is stronger. Of course you may also use the same engine for white and black, so you can face the same ``opponent'' when
+you are the white player and the black player.
+
+Of course you may open the \textit{Game $\rightarrow$ Preferences} panel any time and change the chess engine you want to use, simply by \textit{right clicking}
+on the new chess engine and set it for a colour. The previous association will be overwritten.
+
+Now when you select ``human vs chess engine'' in the \textit{Game $\rightarrow$ Preferences} panel, \nameprog\ will use the selected chess engine.\\
+
+Do not forget to press the \textbf{Save current settings} button or the next time you start \nameprog, you will have to repeat the whole procedure.
+
+
+\subsection{Use a chess engine to analyse the game}
+\label{howce:analys}
+By \textit{right clicking} a chess engine on the \textit{Chess Engine List} in the \textit{Game $\rightarrow$ Preferences} panel, you may also choose
+\textit{Set for Analyser}. The chess engine will be started when you press the \textbf{Analyse move} button in the interface. You can use this feature to let the chess engine
+suggest you a move or let it analyse any move you wish to do.
+
+The Analysis panel opened by \textbf{Analyse move} allows you to set restrictions in searching the best move. You can search the bestmove between a list of moves. Write the list
+in the entry \textit{Restrict search}: the moves should be in long algebraic notation (e.g. e2e4) and separated by commas. The chess engine returns the best move
+between them.
+
+Other options allow you to limit the time of the search, the depth, the number or nodes, or to search if a checkmate could be obtained in a given number of moves.
+
+The results of the search are given in the text area below the panel.\\
+
+You can also edit the full set of options of the chess engine you are using as analyser by clicking on the \textbf{Chess Engine Options} in the Analysis panel: doing this
+the option panel is open (see Section \ref{howce:opt}).
+
+
+\subsection{Chess engine options}
+\label{howce:opt}
+Many chess engines have options or parameters which can be modified by the user (for example, the level of the chess engine). For a complete description of these options,
+please refer to the manual of the chess engine you are using.
+
+The UCI protocol allows \nameprog\ to ask the chess engine for all its options so that they can be configured by the user. Once you have added a chess engine to the list, 
+you can set its options in two ways.
+
+You can \textit{right click} on the chess engine in the Chess Engine List, and from the popup menu choose \textit{Options}. The option panel will appear, it shows all the options
+of the chess engine and their current values. From it you can modify the option values from this panel. Once you are satisfied, press the \textbf{Save changes} button to confirm
+your settings. Your values are saved in a configuration file of \nameprog, so each time you use this chess engine, it will automatically use your values.
+
+The second way is to start the game. Start a new game with the \textbf{New} button. The chess engine will be started. Now you can open the
+\textit{Chess Engine $\rightarrow$ White Options} or \textit{Chess Engine $\rightarrow$ Black Options} panel, depending on which player is the chess engine. The option panel appears.
+You can edit the parameters and then press the button \textbf{Apply changes} to confirm your settings. Now the chess engine will use these values, but will not remember them
+for the next game unless you click also on the \textbf{Save Changes} button. your values are saved in a configuration file of \nameprog, so each time you use this chess engine,
+it will automatically use your values. You can always go back to the default values pressing the \textbf{Reset default values} button. Once you have set the chess engine
+parameters, press the \textbf{Start} button to start the game.
+
+
+\section{The menu bar}
+\label{menu}
+The menu bar contains all the actions and options you can do or set in \nameprog. Here is a short description of each one of them, and
+in square brackets the keyboard shortcut you can use to activate the corresponding action.
+
+\begin{itemize}
+\item \textbf{Game}: contains actions related to the game management:
+\begin{itemize}
+\item \textbf{New}: prepares a new game, same as the button \textbf{New}. \mbox{[Ctrl + N]}
+\item \textbf{Load PGN file}: loads a game from a PGN file (see Section \ref{saveload}). \mbox{[Ctrl + L]}
+\item \textbf{Build from FEN}: builds a game from a valid FEN string you can provide (see Section \ref{saveload}). \mbox{[Ctrl + D]}
+\item \textbf{Save as PGN}: saves the current game in PGN format (see Section \ref{saveload}). \mbox{[Ctrl + S]}
+\item \textbf{Close}: closes the current game. \mbox{[Ctrl + C]}
+\item \textbf{Quit}: closes the current game and the program. \mbox{[Ctrl + Q]}
+\item \textbf{Preferences}: opens the preferences panel (see Sections \ref{gamefeat}, \ref{howce}). \mbox{[Ctrl + P]}
+\end{itemize}
+
+\item \textbf{Actions}: contains actions related to the game itself and its development:
+\begin{itemize}
+\item \textbf{Start}: starts a new game, same as the button \textbf{Start}. \mbox{[Ctrl + E]}
+\item \textbf{Back}: goes back one move, same as the button \textbf{Back}. \mbox{[Ctrl + K]}
+\item \textbf{Back All}: goes back all moves (to the beginning). \mbox{[Ctrl + Z]}
+\item \textbf{Forward}: goes forward one move (if you went back before), same as the button \textbf{Forward}. \mbox{[Ctrl + F]}
+\item \textbf{Forward All}: goes forward all moves (to the last move played). \mbox{[Ctrl + X]}
+\item \textbf{Resign}: resigns and closes the game, same as the button \textbf{Resign}. \mbox{[Ctrl + R]}
+\end{itemize}
+
+\item \textbf{Chess Engine}: contains actions directly related to the chess engines:
+\begin{itemize}
+\item \textbf{White Options}: sets options of the chess engine associated with white (see Section \ref{howce:opt}). \mbox{[Ctrl + W]}
+\item \textbf{Black Options}: sets options of the chess engine associated with black (see Section \ref{howce:opt}). \mbox{[Ctrl + B]}
+\item \textbf{Stop Chess Engine}: stops a chess engine which is thinking and forces it to move, same as the button \textbf{Stop CE} or a \textit{right click}
+of the mouse on the chessboard when the chess engine is thinking. \mbox{[Ctrl + O]}
+\item \textbf{Analyse Move}: starts the chess engine to analyse a game (see Section \ref{howce:analys}), same as the button \textbf{Analyse Move}. \mbox{[Ctrl + A]}
+\end{itemize}
+
+\item \textbf{Writing}: contains actions which can be used to write the current game on the disk in text files (but not in PGN format):
+\begin{itemize}
+\item \textbf{Write short algebraic notation}: writes a text file of the current game in short algebraic notation. \mbox{[Ctrl + I]}
+\item \textbf{Write long algebraic notation}: writes a text file of the current game in long algebraic notation. \mbox{[Ctrl + J]}
+\item \textbf{Show short algebraic notation}: shows the current game in short algebraic notation in a popup label. \mbox{[Ctrl + T]}
+\item \textbf{Show long algebraic notation}: shows the current game in long algebraic notation in a popup label. \mbox{[Ctrl + U]}
+\item \textbf{Get FEN representation}: shows the FEN representation of the chessboard in a popup label (see Section \ref{saveload}). \mbox{[Ctrl + Y]}
+\end{itemize}
+
+\item \textbf{About}: contains actions which display informations on \nameprog:
+\begin{itemize}
+\item \textbf{About}: shows very brief informations on the game and the license. \mbox{[Ctrl + M]}
+\item \textbf{Help}: shows a panel with a quick help and reference. \mbox{[Ctrl + H]}
+\end{itemize}
+
+\end{itemize}
+
+\end{document}
