@@ -1,4 +1,4 @@
-### General information
+## General information
 
 Yagchess is a free GUI to play Chess. It can be used to play chess against other human players on the same machine.
 
@@ -9,7 +9,7 @@ Yagchess uses the UCI protocol to interact with the chesse engine, hence any UCI
 Yagchess stands for Yet Another Gui for CHESS.
 
 
-### Files
+## Files
 
 This distribution of Yagchess version 1.0 consists of the following files:
 
@@ -26,15 +26,15 @@ This distribution of Yagchess version 1.0 consists of the following files:
   * documentation/, a directory containing the manual in pdf format and the tex source of the manual.
 
 
-### Installation
+## Installation
 
 Yagchess can be installed on Linux systems. To compile yagchess, you need the gnu gcc compiler and the gtkmm3.0 (or later) library. The gcc compiler is already installed on most linux distributions. You can install gtkmm by using you package manager. Type:
 
-  apt-get install libgtkmm-3.0-dev
+> apt-get install libgtkmm-3.0-dev
 
 for Debian based distributions or
 
-  yum install gtkmm30-docs
+> yum install gtkmm30-docs
 
 for Fedora/Red Hat based distributions. See also https://www.gtkmm.org/en/download.html
 You probably need root privilege to install the packages.
@@ -42,14 +42,14 @@ You probably need root privilege to install the packages.
 
 To compile the program, once you have installed gtkmm, go in the src directory and type:
 
-  make install
+> make install
 
 To remove executable and object files, go in the src directory and type:
 
-  make clean
+> make clean
 
 
-### Terms of use
+## Terms of use
 
 Yagchess is free and distributed under the GNU General Public License (GPL). Essentially, this means that you are free to do almost exactly what you want with the program, including distributing it among your friends, making it available for download from your web site, selling it (either by itself or as part of some bigger software package), or using it as the starting point for a software project of your own.
 
