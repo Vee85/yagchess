@@ -12,11 +12,12 @@ Yagchess stands for Yet Another Gui for CHESS.
 ## Files
 
 This distribution of Yagchess version 1.0 consists of the following files:
+
 * README.md, the file you are currently reading.
 * LICENSE.txt, a text file containing the GNU General Public License.
 * src/, a subdirectory containing the source code in C++, including a Makefile that can be used to compile Yagchess.
 * resources/, a subdirectory containing xml and css files needed to build the GUI.
-* resources/chess_pieces_icons/, a subdirectory of resources containing the 12 images of the pieces (png format). 
+* resources/chess_pieces_icons/, a subdirectory of resources containing the 12 images of the pieces (png format).
 * documentation/, a directory containing the manual in pdf format and the tex source of the manual.
 
 
