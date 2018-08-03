@@ -40,11 +40,15 @@ MAING=chess_gui
 
 FINAL=yagchess
 
+YAGDIR=$(shell cd .. && pwd)
+
 all: install
 	@echo ""
 
 install: mgui
-	mv $(MAING).x ../$(FINAL).x
+	mv $(MAING).x ../$(FINAL)
+	@echo "Exporting path to bash..."
+	@grep -qF "$(YAGDIR)" ~/.bashrc || echo export PATH=\$${PATH}:$(YAGDIR) >> ~/.bashrc
 	@echo "Done."
 	
 mgui: $(MAING).cpp $(NAMEA).o $(NAMEB).o $(NAMEC).o $(NAMED).o $(NAMEIB).o
@@ -57,21 +61,25 @@ $(NAMEB).o: $(NAMEA).o $(NAMEB).hpp $(NAMEC).hpp $(NAMEB).cpp
 	$(CC) -c $(NAMEB).cpp -o $(NAMEB).o $(OPTIONS) $(CO)
 
 $(NAMEC).o: $(NAMEC).hpp $(NAMEC).cpp
-	$(CC) -c $(NAMEC).cpp -o $(NAMEC).o $(OPTIONS) $(CO)
+	$(CC) -D yagdir="\"$(YAGDIR)\"" -c $(NAMEC).cpp -o $(NAMEC).o $(OPTIONS) $(CO)
 
 $(NAMED).o: $(DEFC).hpp $(NAMEA).hpp $(NAMEB).hpp $(NAMEC).hpp $(NAMED).hpp $(NAMED).cpp
 	$(CC) -c $(NAMED).cpp -o $(NAMED).o $(OPTIONS) $(CO)
 	
 $(NAMEIB).o: $(DEFC).hpp $(NAMEA).hpp $(NAMEB).hpp $(NAMEC).hpp $(NAMED).hpp $(NAMEIB).hpp $(NAMEIB).cpp
-	$(CC) -c $(NAMEIB).cpp -o $(NAMEIB).o $(OPTIONS) $(CO) $(GTKC)
+	$(CC) -D yagdir="\"$(YAGDIR)\"" -c $(NAMEIB).cpp -o $(NAMEIB).o $(OPTIONS) $(CO) $(GTKC)
 
 clean:
 	@echo "Cleaning..."
-	@rm *.o ../$(FINAL).x
+	@rm *.o ../$(FINAL)
+	@echo "Removing from bashrc..."
+	@grep -v "$(YAGDIR)" ~/.bashrc > tempbrc
+	@cp tempbrc ~/.bashrc
+	@rm tempbrc
 	@echo "Done."
 
 help:
-	@echo "To compile $(FINAL), you need the gnu gcc compiler and the gtkmm3.0 library."
+	@echo "To compile $(FINAL) you need the gnu gcc compiler and the gtkmm3.0 library."
 	@echo "The gcc compiler is already installed on most linux distributions."
 	@echo "You can install gtkmm by using you package manager. Type:"
 	@echo "  apt-get install libgtkmm-3.0-dev"

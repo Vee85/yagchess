@@ -217,7 +217,7 @@ ChessUCI::~ChessUCI() {
 //setting name of chess engine and corresponding filename for saving options
 void ChessUCI::setcename(std::string fn) {
   chengname = fn;
-  filename = ".yagchess_ce_" + fn;
+  filename = std::string(yagdir) + "/.yagchess_ce_" + fn;
 }
 
 //formatting the moves for a position startpos moves command 
