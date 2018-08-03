@@ -8,6 +8,7 @@ Yagchess uses the UCI protocol to interact with the chesse engine, hence any UCI
 
 Yagchess stands for Yet Another Gui for CHESS.
 
+NOTE: the installation process should be improved.
 
 ## Files
 
