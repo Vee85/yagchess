@@ -88,7 +88,9 @@ make install
 
 That's all. The program is simple, there is no need of a configure script.
 
-The binary file is created in the main directory, it's called \textbf{yagchess.x}
+The binary file is created in the main directory, it's called \textbf{yagchess}
+
+A line is also added to the \textit{.bashrc} file to add to the PATH environment variable the directory where the binary file is, so you can call \nameprog\ from wherever directory you are.
 
 
 \subsection{Uninstallation}
@@ -98,7 +100,7 @@ To remove executable and object files, go in the src directory and type:
 make clean
 \end{quote}
 
-This will not remove source code, documentation or resources. You can delete all these files manually.
+This will lalso delete the line from \textit{.bashrc} file added at installation time, but it will not remove source code, documentation or resources. You can delete all these files manually.
 
 
 \subsection{Installation under other systems}
@@ -110,6 +112,8 @@ There are no other dependencies.
 
 So if you have a C++14 compiler and you manage to install gtkmm3.0 on your system, you just have to fix the interprocess comunication class in the
 ipcproc.hpp and ipcproc.cpp files by using any function supported by your operative system (or see if those headers are supported by your system).
+
+You may still need to fix the Makefile.
 
 
 \section{Quick start}
