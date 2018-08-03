@@ -28,7 +28,7 @@
 
 //static global variables (it is not an instance of any class), their scope is this file only
 static bool atwork(false);
-static std::string baserespath(std::string(yagdir) + "/resources/");
+static std::string baserespath(std::string(yagdir) + "/resources/");  //yagdir string is passed from makefile
 
 /* Methods of class ChessPGNGui
  */
@@ -607,9 +607,8 @@ void ChessTimer::stopgotimer() {
 /* Methods of ChessWindowGui class
  */
 ChessWindowGui::ChessWindowGui() {
-  std::cout << baserespath << std::endl;
   cnfgf = new ChessConfig();
-  cnfgf->initcc(std::string(yagdir) + "/.yagchess_config", std::string(yagdir) + "/.yagchess_starthum");
+  cnfgf->initcc(std::string(yagdir) + "/.yagchess_config", std::string(yagdir) + "/.yagchess_starthum"); //yagdir string is passed from makefile
   starthumpl = cnfgf->getstarthumpl();
   ucianalys = nullptr;
   
